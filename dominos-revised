@@ -1,0 +1,236 @@
+// Set Type Delay
+TypeDelay = 1;
+
+// Step 1 - Visit URL
+https://www.dominos.com.sg/
+
+// Login variables. Replace with your own.
+email = your-email-address
+password = your-email-password
+
+// Start order
+echo "Start order"
+
+// Step 2 - Login Details
+echo "Login"
+type login_email as `email`
+type login_password as `password`
+
+
+// use break to break out of the immediate loop
+for n from 1 to infinity
+{
+    // Start Login
+    if visible('login-btn') 
+    {
+        echo "Logging In"
+        click login-btn
+        type login_email as `email`
+        type login_password as `password`
+        click //*[@id="sign_in_form"]/div[3]/div[1]/button
+        break
+    }
+    else
+    {   
+        // Logout if user is logged in
+        // echo "Logging Out"
+        hover //*[@id="dominos-header"]/div[2]/div/ul[2]/li[1]/a
+        click //*[@id="trigger-logout"]
+    }
+}
+
+// Step 3 - Start Delivery Order
+echo "Start delivery order"
+wait
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/div[3]/section/div/div[2]/ul[2]/li') 
+    {
+        select orderDate as 2019/07/03
+        click /html/body/div[3]/section/div/div[2]/ul[2]/li
+        wait 2
+        click btnOrderDelivery
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+// Step 4 - Hover over navigation and select pizza menu
+echo "Select pizza menu"
+wait
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/section/div[3]/div/div[2]/ul[1]/li[2]/a') 
+    {
+        hover /html/body/section/div[3]/div/div[2]/ul[1]/li[2]/a
+        click /html/body/section/div[3]/div/div[2]/ul[1]/li[2]/div[2]/a[2]
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+// Step 5 - The best pizza. Classic Pepperoni!
+echo "Select pizza"
+wait
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[1]/a') 
+    {
+        click /html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[1]/a
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+// Step 6 - Select Extra Large Pizza Size and Crust type. So Hungry.
+echo "Select Extra Large"
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[2]/div[2]/form/div[1]/div/div/ul/li[4]') 
+    {
+        click /html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[2]/div[2]/form/div[1]/div/div/ul/li[4]
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+echo "Select Crust"
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[2]/div[2]/form/div[2]/div/div/ul/li') 
+    {
+        click /html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[2]/div[2]/form/div[2]/div/div/ul/li
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+// Step 7 - Add to cart
+echo "Add to cart"
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[2]/div[2]/form/div[4]/div[2]/button') 
+    {
+        click /html/body/div[3]/div[2]/div[2]/div/div[2]/div[4]/div[7]/div/div[2]/div[2]/form/div[4]/div[2]/button
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+// Step 8 - Checkout
+echo "Checkout"
+
+for n from 1 to infinity
+{
+    // Check for visible element
+    if visible('/html/body/section/div[3]/div/div[2]/ul[2]/li[4]/ul/li[3]/a') 
+    {
+        click /html/body/section/div[3]/div/div[2]/ul[2]/li[4]/ul/li[3]/a
+        break
+    }
+    else
+    {   
+        // Wait for 2 secs
+        wait 2
+    }
+}
+
+// Step 9 - Go straight to payment page
+// Store delivery time to `orderTime` variable for push notifications
+// For actual order, use the estimated delivery time on the order confirmation page.
+echo "Make payment"
+https://www.dominos.com.sg/mycart/payment
+read payment-orderTime to orderTime
+wait
+
+// Step 10 - Complete Order
+// Insert the steps from order confirmation page here.
+
+//Logout
+hover //*[@id="dominos-header"]/div[2]/div/ul[2]/li[1]/a
+click //*[@id="trigger-logout"]
+wait
+click (`18`, `41`)
+wait
+
+// Step 11 - Send Email Notification
+// Click Mail App. Replace X and Y coordinates with your own.
+echo "Sending Email"
+hover (`57`,`78`)
+wait 2
+dclick (`57`,`78`)
+wait
+
+// Create New Mail
+click (`76`,`60`)
+wait
+keyboard your-email-address
+wait
+
+// Enter Subject
+vision type(Key.TAB)
+vision type(Key.TAB)
+wait
+keyboard Your Pizza Delivery Details
+wait
+
+// Enter Message
+vision type(Key.TAB)
+wait
+keyboard Your pizza will arrive at approximately 12pm.
+wait
+
+// Send email
+click (`432`,`145`)
+wait
+
+// Close mail app
+click (`14`, `32`)
+
+// Step 11 - Send Push Notifications via Pushed API
+// Replace 'orderTime' with estimated delivery time from order confirmation page.
+// echo "Sending push notification"
+
+// app_key = your-app-key
+// app_secret = your-app-secret
+// message = "Your pizza will arrive approximately 1 hour after " + orderTime
+
+// api_config = {method:'POST', header:[], body:{}}
+
+// api https://api.pushed.co/1/push?app_key=`app_key`&app_secret=`app_secret`&target_type=app&content=`message`

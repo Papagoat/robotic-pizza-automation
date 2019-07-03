@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /tagui/src
+./tagui samples/Dominos/robotic-pizza-automation/dominos-revised chrome quiet
