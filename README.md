@@ -1,7 +1,7 @@
 # robotic-pizza-automation
 Robotic Pizza Automation with Robotic Process Automation
 
-All credits to [kensoh](https://github.com/kelaberetiv/TagUI)
+All credits to [@kensoh](https://github.com/kensoh)
 
 ## Setup Instructions
 [TagUI setup](https://github.com/kelaberetiv/TagUI#set-up)
